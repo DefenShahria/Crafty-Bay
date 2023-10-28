@@ -1,0 +1,116 @@
+import 'package:craftybay/presentation/State_holders/emali_Verification_controller.dart';
+import 'package:craftybay/presentation/ui/utility/Image_data/Image_path.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'Otp_Verification_Screen.dart';
+
+class EmailVerificationScreen extends StatefulWidget {
+  const EmailVerificationScreen({super.key});
+
+  @override
+  State<EmailVerificationScreen> createState() =>
+      _EmailVerificationScreenState();
+}
+
+class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
+  final TextEditingController _emailTEController = TextEditingController();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  Center(
+                    child: SvgPicture.asset(
+                      ImagePath.logoSVG,
+                      width: 100,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    'Welcome Back',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(fontSize: 24),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text('Please Enter Your Email Address',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(color: Colors.grey)),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  TextFormField(
+                    controller: _emailTEController,
+                    decoration: const InputDecoration(
+                      hintText: 'Email',
+                    ),
+                    validator: (String? text) {
+                      if (text?.isEmpty ?? true) {
+                        return 'Enter Your Email Address';
+                      } else if (text!.isEmail == false) {
+                        return 'Enter Your Valid Email Address';
+                      }
+                    },
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: GetBuilder<EmailVerificationController>(
+                        builder: (controller) {
+                      if (controller.emailVerificationinProgress) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            verifyEmail(controller);
+                          }
+                        },
+                        child: const Text('Next'),
+                      );
+                    }),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+  Future<void>verifyEmail(EmailVerificationController controller) async {
+    final response = await controller
+        .verifyEmail(_emailTEController.text.trim());
+    if (response) {
+      Get.off(()=> otpVerification(email: _emailTEController.text.trim(),));
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text('Verification Failed !')));
+      }
+    }
+}}
