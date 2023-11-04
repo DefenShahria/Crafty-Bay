@@ -24,6 +24,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   int _selectedColorindex = 0;
   int _selectedSizeindex = 0;
+  int quantity = 0;
 
   @override
   void initState() {
@@ -84,6 +85,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 value: 1,
                                 onChange: (newValue) {
                                   print(newValue);
+                                  quantity = newValue;
                                 })
                           ],
                         ),
@@ -140,39 +142,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                         SizedBox(
                           height: 25,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemCount:
-                                productDetailsController.availableColors.length,
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                                borderRadius: BorderRadius.circular(20),
-                                onTap: () {
-                                  _selectedColorindex = index;
-                                  if (mounted) {
-                                    setState(() {});
-                                  }
-                                },
-                                child: CircleAvatar(
-                                  radius: 15,
-                                  backgroundColor: HexColor.fromHex(
-                                      productDetailsController
-                                          .availableColors[index]),
-                                  child: _selectedColorindex == index
-                                      ? const Icon(
-                                          Icons.done,
-                                          color: Colors.white,
-                                        )
-                                      : null,
-                                ),
-                              );
+                          child: ColorSelector(
+                            size: productDetailsController.availableColors ,
+                            onSelected: (int selectedIndex) {
+                              _selectedColorindex = selectedIndex;
+                              if(mounted) {
+                                setState(() {});
+                              }
                             },
-                            separatorBuilder:
-                                (BuildContext context, int index) {
-                              return const SizedBox(
-                                width: 8,
-                              );
-                            },
+                            initialSelected: 0,
                           ),
                         ),
                         const SizedBox(
@@ -190,7 +168,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                         SizedBox(
                           height: 25,
-                          child: SileSelector(
+                          child: ColorSelector(
                             size: productDetailsController.availabeSize ,
                             onSelected: (int selectedIndex) {
                               _selectedSizeindex = selectedIndex;
@@ -228,8 +206,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 btnName: 'Add to cart',
                 produc_ID: productDetailsController.productDetails.product?.id ?? 0,
                 productSize: productDetailsController.availabeSize[_selectedSizeindex],
-                productColor: productDetailsController
-                    .availableColors[_selectedColorindex],
+                productColor: productDetailsController.availableColors[_selectedColorindex],
+                quantity: quantity,
 
 
               )

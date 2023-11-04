@@ -2,17 +2,17 @@
 import 'package:craftybay/presentation/ui/utility/ColorPallet.dart';
 import 'package:flutter/material.dart';
 
-class SileSelector extends StatefulWidget {
-  const SileSelector({super.key, required this.size, required this.onSelected, required this.initialSelected});
+class ColorSelector extends StatefulWidget {
+  const ColorSelector({super.key, required this.size, required this.onSelected, required this.initialSelected});
   final List<String>  size;
   final Function(int selectedIndex) onSelected;
   final int initialSelected;
 
   @override
-  State<SileSelector> createState() => _SileSelectorState();
+  State<ColorSelector> createState() => _ColorSelectorState();
 }
 
-class _SileSelectorState extends State<SileSelector> {
+class _ColorSelectorState extends State<ColorSelector> {
   int _selectedSizeindex = 0;
 
   void initState(){

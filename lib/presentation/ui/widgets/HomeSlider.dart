@@ -21,7 +21,7 @@ class _HomeSliderState extends State<HomeSlider> {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-              height: 180.0,
+              height: 200.0,
               autoPlay: true,
               autoPlayAnimationDuration: const Duration(seconds: 3),
               onPageChanged: (int page, _){
@@ -41,7 +41,7 @@ class _HomeSliderState extends State<HomeSlider> {
                     alignment: Alignment.center,
                     child: Stack(
                       children: [
-                        Image.network(sliderData.image ?? ''),
+                        Image.network(sliderData.image ?? '',height: 100,),
                         Positioned(
                             bottom: 0,
                             child: Column(
@@ -51,7 +51,7 @@ class _HomeSliderState extends State<HomeSlider> {
                             Text(sliderData.title ?? '',style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
-                              color: Colors.white
+                              color: Colors.black
                             ),)
                           ],
                         ))

@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 class Bottmom_Btn_dtls extends StatelessWidget {
   const Bottmom_Btn_dtls({
-    super.key, required this.tag, required this.price, required this.btnName, required this.produc_ID, required this.productSize, required this.productColor,
+    super.key, required this.tag, required this.price, required this.btnName, required this.produc_ID, required this.productSize, required this.productColor, required this.quantity,
   });
 final String tag;
 final String price;
@@ -15,6 +15,7 @@ final String btnName;
 final int produc_ID;
 final String productSize;
 final String productColor;
+final int quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,7 @@ final String productColor;
                 }
                 return ElevatedButton(
                   onPressed: () {
-                    addToCartController.addToCart(produc_ID.toString(), productColor.toString(), productSize.toString()).then((result){
+                    addToCartController.addToCart(produc_ID.toString(), productColor.toString(), productSize.toString(),quantity).then((result){
                       if(result){
                         Get.snackbar('Cart msg', 'Successfully Added on cart',snackPosition: SnackPosition.BOTTOM);
                       }else {

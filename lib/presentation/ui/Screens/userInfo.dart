@@ -29,71 +29,76 @@ class _UserInfoState extends State<UserInfo> {
             body: SingleChildScrollView(
               child: Padding(
                 padding:  EdgeInsets.all(16.0),
-                child: GetBuilder<UserInfoController>(
+                child: Center(
+                  child: GetBuilder<UserInfoController>(
 
-                  builder: (userInfoController) {
-                    if(userInfoController.getUserINforInprogess){
-                      return CircularProgressIndicator();
-                    }
-                    return Column(
-                      children: [
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Center(
-                          child: SvgPicture.asset(
-                            ImagePath.logoSVG,
-                            width: 70,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                    Text('Complete profile',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.copyWith(fontSize: 20),
-                    ),const SizedBox(
-                          height: 8,
-                        ),
-                        Text( userInfoController.userinfo.data?.first.firstName ?? " Baal" , style: TextStyle(color: Colors.black),),
-                        Text( userInfoController.userinfo.data?.first.lastName ?? " Baal" , style: TextStyle(color: Colors.black),),
-                        Text( userInfoController.userinfo.data?.first.email ?? " Baal" , style: TextStyle(color: Colors.black),),
-                        Text( userInfoController.userinfo.data?.first.mobile ?? " Baal" , style: TextStyle(color: Colors.black),),
-
-
-
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text('Get Start With us With Your Details',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(color: Colors.grey,fontSize: 14)),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-
+                      builder: (userInfoController) {
+                        if(userInfoController.getUserINforInprogess){
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return Column(
+                          children: [
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Center(
+                              child: SvgPicture.asset(
+                                ImagePath.logoSVG,
+                                width: 70,
+                              ),
+                            ),
                             const SizedBox(
                               height: 16,
                             ),
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Get.to(CompleteProfile());
-                                }, child: const Text('Complete'),),),
-                          ],
-                        );
-                  }
+                        Text('Complete profile',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge
+                              ?.copyWith(fontSize: 20),
+                        ),const SizedBox(
+                              height: 8,
+                            ),
+                            Text( userInfoController.userinfo.data?.first.firstName ?? " Baal" , style: TextStyle(color: Colors.black),),
+                            Text( userInfoController.userinfo.data?.first.lastName ?? " Baal" , style: TextStyle(color: Colors.black),),
+                            Text( userInfoController.userinfo.data?.first.email ?? " Baal" , style: TextStyle(color: Colors.black),),
+                            Text( userInfoController.userinfo.data?.first.mobile ?? " Baal" , style: TextStyle(color: Colors.black),),
+
+
+
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Text('Get Start With us With Your Details',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(color: Colors.grey,fontSize: 14)),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Get.to(CompleteProfile());
+                                    }, child: const Text('Complete'),),),
+                              ],
+                            );
+                      }
+                    ),
+                ),
                 ),
                   ),
-                ),
+
               );
         }
 

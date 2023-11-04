@@ -1,5 +1,5 @@
 class Urls{
-  static const String baseUrls = 'https://craftybay.teamrabbil.com/api';
+  static const String baseUrls = 'https://ecom-api.teamrabbil.com/api';
 
   static String VerifyEmail(String email) => '$baseUrls/UserLogin/$email';
   static String Verifyotp(String email,String otp) => '$baseUrls/VerifyLogin/$email/$otp';

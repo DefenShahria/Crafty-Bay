@@ -50,7 +50,7 @@ class _otpVerificationState extends State<otpVerification> {
                 const SizedBox(
                   height: 8,
                 ),
-                Text('A 4 digit OTP code has been Sent',
+                Text('A 6 digit OTP code has been Sent',
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium
@@ -60,7 +60,7 @@ class _otpVerificationState extends State<otpVerification> {
                 ),
                 PinCodeTextField(
                   controller: _otpTEController,
-                  length: 4,
+                  length: 6,
                   obscureText: false,
                   animationType: AnimationType.fade,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -69,7 +69,7 @@ class _otpVerificationState extends State<otpVerification> {
                     shape: PinCodeFieldShape.box,
                     borderRadius: BorderRadius.circular(5),
                     fieldHeight: 50,
-                    fieldWidth: 40,
+                    fieldWidth: 50,
                     activeFillColor: Colors.white,
                     inactiveFillColor: Colors.white,
                     selectedFillColor: Colors.white,
