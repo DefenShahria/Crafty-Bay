@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:craftybay/presentation/State_holders/optVerificationController.dart';
 import 'package:craftybay/presentation/ui/Screens/CompleateProfileScreen.dart';
 import 'package:craftybay/presentation/ui/Screens/HomePage.dart';
@@ -18,7 +20,23 @@ class otpVerification extends StatefulWidget {
 }
 
 class _otpVerificationState extends State<otpVerification> {
+
+  static const maxSeconds = 120;
+  int second = maxSeconds;
+  int attempt =0;
   final TextEditingController _otpTEController = TextEditingController();
+  Timer? timer;
+  void startTimer(){
+    timer = Timer.periodic(Duration(seconds: 1), (_) {
+      setState(() {
+        if(second >0){
+          second--;
+        }else{
+
+        }
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,7 +141,7 @@ class _otpVerificationState extends State<otpVerification> {
                       text: 'This code will expire in '
                     ),
                     TextSpan(
-                      text: '120s',
+                      text: '$second s',
                       style: TextStyle(
                         color: AppColor.primaryColor,
                         fontWeight: FontWeight.bold
@@ -151,4 +169,5 @@ class _otpVerificationState extends State<otpVerification> {
       }
     }
   }
+
 }

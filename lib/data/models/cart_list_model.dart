@@ -36,7 +36,7 @@ class CartData {
   String? createdAt;
   String? updatedAt;
   Product? product;
-  int numberOfItems = 1;
+  int? quantity;
 
   CartData(
       {this.id,
@@ -46,6 +46,7 @@ class CartData {
         this.size,
         this.createdAt,
         this.updatedAt,
+        this.quantity,
         this.product});
 
   CartData.fromJson(Map<String, dynamic> json) {
@@ -56,6 +57,7 @@ class CartData {
     size = json['size'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    quantity = int.tryParse(json['qty'] ?? 1);
     product =
     json['product'] != null ? Product.fromJson(json['product']) : null;
   }

@@ -24,7 +24,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   int _selectedColorindex = 0;
   int _selectedSizeindex = 0;
-  int quantity = 0;
+  int quantity = 1;
 
   @override
   void initState() {

@@ -4,6 +4,8 @@ import 'package:craftybay/presentation/ui/widgets/product_In_Cart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../widgets/btm_btn_dtl.dart';
+
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
 
@@ -16,7 +18,7 @@ class _CartScreenState extends State<CartScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.find<CartListController>().getcartList();
+      Get.find<CartListController>().getCartList();
     });
   }
   @override
@@ -42,7 +44,7 @@ class _CartScreenState extends State<CartScreen> {
         ),
         body: GetBuilder<CartListController>(
           builder: (cartListController) {
-            if(cartListController.getCartListINProgress){
+            if(cartListController.getCartListInProgress){
               return Center(
                 child: CircularProgressIndicator(),
               );
@@ -57,7 +59,7 @@ class _CartScreenState extends State<CartScreen> {
                       cartdata: cartListController.cartListModel.data![index],);
                   }),
                 ),
-                // Bottmom_Btn_dtls(tag: 'Price', price: '100', btnName: 'Check Out',)
+                 Bottmom_Btn_dtls(tag: 'Total Price', price: '${cartListController.totalPrice}', btnName: 'Check Out', produc_ID: 0, productSize: '', productColor: '', quantity: 0,)
               ],
             );
           }

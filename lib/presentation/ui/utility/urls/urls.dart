@@ -12,4 +12,5 @@ class Urls{
   static String getCartlist = '$baseUrls/CartList';
   static String CreateProfile = '$baseUrls/CreateProfile';
   static String ReadProfile = '$baseUrls/ReadProfile';
+  static String removeFromCart(int id) => '$baseUrls/DeleteCartList/$id';
 }
