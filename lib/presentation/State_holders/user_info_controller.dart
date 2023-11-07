@@ -20,6 +20,7 @@ class UserInfoController extends GetxController{
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(Urls.ReadProfile);
     _getUserINforInprogess =false;
+    update();
     log(userinfo.data.toString());
     if(response.isSucess){
       _userInfo = UserInfoModel.fromJson(response.body!);

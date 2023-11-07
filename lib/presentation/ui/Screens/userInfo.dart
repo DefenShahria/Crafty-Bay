@@ -6,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class UserInfo extends StatefulWidget {
-  const UserInfo({super.key});
+  const UserInfo({Key? key});
 
   @override
   State<UserInfo> createState() => _UserInfoState();
@@ -21,85 +21,83 @@ class _UserInfoState extends State<UserInfo> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<UserInfoController>().getuserinfo();
+
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            body: SingleChildScrollView(
-              child: Padding(
-                padding:  EdgeInsets.all(16.0),
-                child: Center(
-                  child: GetBuilder<UserInfoController>(
-
-                      builder: (userInfoController) {
-                        if(userInfoController.getUserINforInprogess){
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                        return Column(
-                          children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Center(
-                              child: SvgPicture.asset(
-                                ImagePath.logoSVG,
-                                width: 70,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                        Text('Complete profile',
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge
-                              ?.copyWith(fontSize: 20),
-                        ),const SizedBox(
-                              height: 8,
-                            ),
-                            Text( userInfoController.userinfo.data?.first.firstName ?? " Baal" , style: TextStyle(color: Colors.black),),
-                            Text( userInfoController.userinfo.data?.first.lastName ?? " Baal" , style: TextStyle(color: Colors.black),),
-                            Text( userInfoController.userinfo.data?.first.email ?? " Baal" , style: TextStyle(color: Colors.black),),
-                            Text( userInfoController.userinfo.data?.first.mobile ?? " Baal" , style: TextStyle(color: Colors.black),),
-
-
-
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text('Get Start With us With Your Details',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(color: Colors.grey,fontSize: 14)),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      Get.to(CompleteProfile());
-                                    }, child: const Text('Complete'),),),
-                              ],
-                            );
-                      }
-                    ),
-                ),
-                ),
-                  ),
-
-              );
-        }
-
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Center(
+              child: GetBuilder<UserInfoController>(
+                builder: (userInfoController) {
+                  if (userInfoController.getUserINforInprogess) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Center(
+                        child: SvgPicture.asset(
+                          ImagePath.logoSVG,
+                          width: 70,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Text(
+                        'Your Profile is Complete',
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 20),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(userInfoController.userinfo.data?.cusName ?? "Baal", style: TextStyle(color: Colors.black)),
+                      Text(userInfoController.userinfo.data?.cusPhone ?? "Baal", style: TextStyle(color: Colors.black)),
+                      Text(userInfoController.userinfo.data?.shipAdd ?? "Baal", style: TextStyle(color: Colors.black)),
+                      Text(userInfoController.userinfo.data?.cusCity ?? "Baal", style: TextStyle(color: Colors.black)),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        'Get Started With Us With Your Details',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.grey, fontSize: 14),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.to(CompleteProfile());
+                          },
+                          child: const Text('Update ?'),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
+}

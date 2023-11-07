@@ -1,17 +1,23 @@
+import 'package:craftybay/data/models/ProductDetails.dart';
 import 'package:craftybay/presentation/ui/Screens/HomePage.dart';
-import 'package:craftybay/presentation/ui/utility/Image_data/Image_path.dart';
+import 'package:craftybay/presentation/ui/Screens/productDetailsScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../State_holders/reviewController.dart';
+
 class AddReview extends StatefulWidget {
-  const AddReview({super.key});
+  final int ID;
+  const AddReview({super.key, required this.ID});
 
   @override
   State<AddReview> createState() => _AddReviewState();
 }
 
 class _AddReviewState extends State<AddReview> {
+  final TextEditingController _reviewTEController = TextEditingController();
+  final TextEditingController _ratingTEController = TextEditingController();
+  final ReviewController reviewController= Get.find<ReviewController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,43 +38,70 @@ class _AddReviewState extends State<AddReview> {
             child: Column(
               children: [
                 const SizedBox(
+                  height: 16,
+                ),
+
+                TextFormField(
+                  controller: _reviewTEController,
+                  maxLines: 5,
+                  decoration: const InputDecoration(hintText: 'Write Review',
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16,vertical: 16,
+                      ),),
+                  validator:(String? text) {
+                    if (text?.isEmpty ?? true) {
+                      return 'Enter Review';
+                    }
+                    return null;
+                  } ,
+                ),
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
-                  decoration: const InputDecoration(hintText: 'First Name',
+                  controller: _ratingTEController,
+                  decoration: const InputDecoration(hintText: 'Rating',
                     contentPadding: EdgeInsets.symmetric(horizontal: 16),
                     enabledBorder: OutlineInputBorder(),
                     disabledBorder: OutlineInputBorder(),
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(hintText: 'Last Name',
-
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
+                  validator: (String? text) {
+                    if (text?.isEmpty ?? true) {
+                      return 'Enter Rating';
+                    }
+                    return null;
+                  },
                 ),
 
-                TextFormField(
-                  maxLines: 5,
-                  decoration: const InputDecoration(hintText: 'Write Review',
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16,vertical: 16,)
-
-                  ),
-                ),
                 const SizedBox(
                   height: 16,
                 ),
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Get.offAll(const HomePage());
-                    }, child: const Text('Submit'),),),
+                  child: GetBuilder<ReviewController>(
+                    builder: (reviewController) {
+                      if(reviewController.postReviewInprogress){
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return ElevatedButton(
+                        onPressed: () {
+                          reviewController
+                              .createReview(
+                              _reviewTEController.text,
+                              widget.ID,
+                              _ratingTEController.text
+                          ).then((result) {
+                            if (result == true) {
+                              Get.offAll(
+                                  ProductDetailsScreen(productID: widget.ID));
+                            } else {
+                              Get.snackbar('Failed', 'Create profile failed');
+                            }
+                          });
+                        }, child: const Text('Submit'),);
+                    },
+                  ),),
               ],
             ),
           ),

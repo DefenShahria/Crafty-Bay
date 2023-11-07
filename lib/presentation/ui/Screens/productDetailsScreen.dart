@@ -110,7 +110,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 onPressed: () {},
                                 child: TextButton(
                                   onPressed: () {
-                                    Get.to(const ReviewPage());
+                                    Get.to( ReviewPage(productID: widget.productID,));
                                   },
                                   child: Text('Review',
                                       style: TextStyle(

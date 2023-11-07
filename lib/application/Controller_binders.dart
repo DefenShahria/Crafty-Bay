@@ -11,6 +11,7 @@ import 'package:craftybay/presentation/State_holders/popular_Product_controller.
 import 'package:craftybay/presentation/State_holders/productList_controller.dart';
 import 'package:craftybay/presentation/State_holders/product_details_Controller.dart';
 import 'package:craftybay/presentation/State_holders/profile_update_Controller.dart';
+import 'package:craftybay/presentation/State_holders/reviewController.dart';
 import 'package:craftybay/presentation/State_holders/user_info_controller.dart';
 import 'package:get/get.dart';
 
@@ -31,5 +32,6 @@ class Controller_binder extends Bindings{
     Get.put(ProfileUpdateController());
     Get.put(CartListController());
     Get.put(UserInfoController());
+    Get.put(ReviewController());
   }
 }
