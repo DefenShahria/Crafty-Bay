@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:craftybay/presentation/State_holders/optVerificationController.dart';
-import 'package:craftybay/presentation/ui/Screens/CompleateProfileScreen.dart';
-import 'package:craftybay/presentation/ui/Screens/HomePage.dart';
 import 'package:craftybay/presentation/ui/Screens/main_bottom_navBar.dart';
 import 'package:craftybay/presentation/ui/utility/ColorPallet.dart';
 import 'package:craftybay/presentation/ui/utility/Image_data/Image_path.dart';

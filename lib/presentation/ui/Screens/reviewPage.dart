@@ -4,6 +4,8 @@ import 'package:craftybay/presentation/ui/utility/ColorPallet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../State_holders/user_info_controller.dart';
+
 class ReviewPage extends StatefulWidget {
   final int productID;
   const ReviewPage({super.key, required this.productID});
@@ -17,8 +19,13 @@ class _ReviewPageState extends State<ReviewPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<ReviewController>().getReview(widget.productID);
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Get.find<UserInfoController>().getuserinfo();
+      });
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

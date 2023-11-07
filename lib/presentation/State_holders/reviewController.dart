@@ -19,10 +19,10 @@ class ReviewController extends GetxController{
     _getReviewInprogress = false;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(Urls.review(id));
+    _getReviewInprogress = false;
+    update();
     if(response.isSucess){
       _reviewmodel = ReviewModel.fromJson(response.body ?? {});
-      _getReviewInprogress = false;
-      update();
       return true;
     }else{
       _erroeMessege = 'Fetch Product Review Failed';
@@ -42,10 +42,8 @@ class ReviewController extends GetxController{
     _postReviewInprogress = false;
     update();
     if(response.isSucess) {
-      _postReviewInprogress= false;
       return true;
     }else {
-      _postReviewInprogress = false;
 
       _erroeMessege = 'Create Review failed';
       return false;
