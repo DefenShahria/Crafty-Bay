@@ -16,6 +16,7 @@ class WishList_Screen extends StatefulWidget {
 }
 
 class _WishList_ScreenState extends State<WishList_Screen> {
+  final WishListController wishListController = Get.find<WishListController>();
 
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -36,39 +37,26 @@ class _WishList_ScreenState extends State<WishList_Screen> {
           leading: const BackButton(
             color: Colors.black,
           ),
-          title: const Text('Wish List',style: TextStyle(
-            color: Colors.black,
-          ),),
-          backgroundColor: Colors.white,
+          title: const Text('Wish List',
+          ),
           elevation: 0,
         ),
         body: GetBuilder<WishListController>(
-          builder: (wishListController) {
-            if (wishListController.getWishListIsInProgress) {
-              return const Center(child: CircularProgressIndicator.adaptive());
-            } else if (wishListController.wishListModel.data?.isEmpty ?? true) {
-              return const Center(
-                child: Text(
-                  'Empty wishlist.',
-                ),
-              );
-            }
-            return GridView.builder(
-              padding: const EdgeInsets.all(5.0),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 5,
-              ),
-              itemCount: wishListController.wishListModel.data?.length ?? 0,
-              itemBuilder: (context, index) {
-                final ProductData productData = wishListController.wishListModel.data![index].product! as ProductData;
-                return FittedBox(
-
+            builder: (wishListController) {
+              if(wishListController.getWishListIsInProgress) {
+                return const SizedBox(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 );
-              },
-            );
-          },
+              }
+              return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: wishListController.wishListModel.data?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    return;
+                  });
+            }
         ),
       ),
     );

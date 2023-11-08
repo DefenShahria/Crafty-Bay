@@ -1,6 +1,7 @@
 import 'package:craftybay/presentation/State_holders/Home_slider_controller.dart';
 import 'package:craftybay/presentation/State_holders/New_Product_controller.dart';
 import 'package:craftybay/presentation/State_holders/Special_Product_controller.dart';
+import 'package:craftybay/presentation/State_holders/WishlistContoller.dart';
 import 'package:craftybay/presentation/State_holders/add_ToCart_Controller.dart';
 import 'package:craftybay/presentation/State_holders/bottom_Nav_controller.dart';
 import 'package:craftybay/presentation/State_holders/cart_listController.dart';
@@ -14,6 +15,8 @@ import 'package:craftybay/presentation/State_holders/profile_update_Controller.d
 import 'package:craftybay/presentation/State_holders/reviewController.dart';
 import 'package:craftybay/presentation/State_holders/user_info_controller.dart';
 import 'package:get/get.dart';
+
+import '../presentation/State_holders/Invoice_Controller.dart';
 
 class Controller_binder extends Bindings{
   @override
@@ -33,5 +36,7 @@ class Controller_binder extends Bindings{
     Get.put(CartListController());
     Get.put(UserInfoController());
     Get.put(ReviewController());
+    Get.put(WishListController());
+    Get.put(CreateInvoiceController());
   }
 }

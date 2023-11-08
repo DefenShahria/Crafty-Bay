@@ -31,10 +31,8 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
           ),
           title: Text(
             'Category',
-            style: TextStyle(color: Colors.black),
           ),
           elevation: 0,
-          backgroundColor: Colors.white,
         ),
         body: RefreshIndicator(
           onRefresh: () async{

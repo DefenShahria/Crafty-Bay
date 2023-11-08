@@ -10,11 +10,11 @@ import '../ui/utility/urls/urls.dart';
 class WishListController extends GetxController{
   bool _getWishListIsInProgress = false;
   String _message ='';
-  WishListModel _wishList = WishListModel();
+  WishListModel _wishListModel = WishListModel();
 
   bool get getWishListIsInProgress => _getWishListIsInProgress;
   String get message => _message;
-  WishListModel get wishListModel => _wishList;
+  WishListModel get wishListModel => _wishListModel;
 
   Future<bool>getWishList()async{
     _getWishListIsInProgress= true;
@@ -24,7 +24,7 @@ class WishListController extends GetxController{
     update();
     log(wishListModel.data.toString());
     if(response.isSucess){
-      _wishList = WishListModel.fromJson(response.body!);
+      _wishListModel = WishListModel.fromJson(response.body!);
       update();
       return true;
     }else{

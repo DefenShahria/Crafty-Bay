@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:craftybay/presentation/State_holders/optVerificationController.dart';
 import 'package:craftybay/presentation/ui/Screens/main_bottom_navBar.dart';
@@ -10,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../State_holders/user_info_controller.dart';
+import 'CompleateProfileScreen.dart';
 
 class otpVerification extends StatefulWidget {
   final String email;
@@ -21,12 +23,14 @@ class otpVerification extends StatefulWidget {
 
 class _otpVerificationState extends State<otpVerification> {
 
+  final UserInfoController userInfoController = Get.find<UserInfoController>();
+
   static const maxSeconds = 120;
   int second = maxSeconds;
   int attempt =0;
   final TextEditingController _otpTEController = TextEditingController();
   Timer? timer;
-  
+
   void startTimer(){
     timer = Timer.periodic(Duration(seconds: 1), (_) {
       setState(() {
@@ -163,7 +167,13 @@ class _otpVerificationState extends State<otpVerification> {
   Future<void>verifyOTP(OTPVerificationController controller) async {
     final response = await controller.verifyotp(widget.email, _otpTEController.text.trim());
     if (response) {
-      Get.offAll(()=>const BottomNavigationScreen());
+     await userInfoController.getuserinfo();
+     log(userInfoController.userinfo.data.toString());
+     if(userInfoController.userinfo.data != null ){
+       Get.offAll(()=>const BottomNavigationScreen());
+     }else{
+       Get.offAll(()=>const CompleteProfile());
+     }
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

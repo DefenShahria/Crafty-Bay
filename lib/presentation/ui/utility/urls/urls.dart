@@ -17,4 +17,5 @@ class Urls{
   static String createreview = '$baseUrls/CreateProductReview';
   static String createWishList(int id) => '$baseUrls/CreateWishList/$id';
   static String getWishList = '$baseUrls/ProductWishList';
+  static String createInvoice = '$baseUrls/InvoiceCreate';
 }
