@@ -59,7 +59,6 @@ class _WishList_ScreenState extends State<WishList_Screen> {
                 crossAxisCount: 3,
                 crossAxisSpacing: 5,
                 mainAxisSpacing: 5,
-                childAspectRatio: 2.3 / 3,
               ),
               itemCount: wishListController.wishListModel.data?.length ?? 0,
               itemBuilder: (context, index) {
