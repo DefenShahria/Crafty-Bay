@@ -57,7 +57,8 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                       mainAxisSpacing: 8,
                     ),
                     itemBuilder: (context, index) {
-                      return  FittedBox(child: Category_cart(categorydata: categoryController.categorymodel.data![index],
+                      return  FittedBox(
+                          child: Category_cart(categorydata: categoryController.categorymodel.data![index],
                           onTap:(){
                         Get.to(ProductListScreenByCategory(catrgoryId:categoryController.categorymodel.data![index].id!));
                           }

@@ -9,6 +9,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../State_holders/user_info_controller.dart';
+
 class otpVerification extends StatefulWidget {
   final String email;
   const otpVerification({super.key, required this.email});
@@ -24,6 +26,7 @@ class _otpVerificationState extends State<otpVerification> {
   int attempt =0;
   final TextEditingController _otpTEController = TextEditingController();
   Timer? timer;
+  
   void startTimer(){
     timer = Timer.periodic(Duration(seconds: 1), (_) {
       setState(() {
@@ -35,6 +38,8 @@ class _otpVerificationState extends State<otpVerification> {
       });
     });
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
